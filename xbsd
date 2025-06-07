@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omzet Harian AEON BSD - V2 by Tian</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --danger: #f72585;
+            --warning: #f8961e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 2.2rem;
+        }
+        
+        .version-badge {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .subtitle {
+            color: var(--gray);
+            font-weight: 400;
+            margin-top: 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title .icon {
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #3ab5d8;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #e5177a;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e68a1a;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3830b3;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            flex: 1 1 auto;
+            min-width: 120px;
+        }
+        
+        .report-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 8px;
+            white-space: pre-line;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .close-btn:hover {
+            color: var(--dark);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            border: 1px solid var(--light-gray);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 500;
+        }
+        
+        tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        tr:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .positive {
+            color: #2ecc71;
+            font-weight: 500;
+        }
+        
+        .negative {
+            color: var(--danger);
+            font-weight: 500;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 25px;
+            border-radius: 10px;
+            background-color: var(--primary);
+            text-align: center;
+            color: white;
+            line-height: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: width 0.5s ease;
+        }
+        
+        .target-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .storage-status {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 10px;
+            text-align: right;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .summary-item h3 {
+            font-size: 1rem;
+            color: var(--gray);
+            margin: 0 0 10px 0;
+        }
+        
+        .summary-item p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .summary-item .subtext {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .target-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group .btn {
+                min-width: 100%;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+            
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="version-badge">V2 by Tian</span>
+            <h1>Omzet Harian AEON BSD</h1>
+            <p class="subtitle">Pantau dan kelola target omzet bulanan dengan mudah</p>
+        </header>
+        
+        <div class="card">
+            <h2 class="card-title">
+                <span><i class="fas fa-cog"></i> Pengaturan Target Bulanan</span>
+            </h2>
+            <div class="form-group">
+                <label for="targetMonth">Bulan dan Tahun:</label>
+                <input type="month" id="targetMonth" required>
+            </div>
+            
+            <div class="target-form">
+                <div class="form-group">
+                    <label for="target100">Target 100% (Rp):</label>
+                    <input type="number" id="target100" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target1">Target 1 (Rp):</label>
+                    <input type="number" id="target1" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target2">Target 2 (Rp):</label>
+                    <input type="number" id="target2" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="target3">Target 3 (Rp):</label>
+                    <input type="number" id="target3" min="0" required>
+                </div>
+            </div>
+            
+            <button id="saveTargetBtn" class="btn btn-primary">
+                <i class="fas fa-save"></i> Simpan Target
+            </button>
+            <div class="storage-status" id="targetStorageStatus"></div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">
+                <span><i class="fas fa-chart-line"></i> Summary Bulanan</span>
+            </h2>
+            <div id="monthlySummary">
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h3>Total Omzet</h3>
+                        <p id="totalOmzet">Rp 0</p>
+                        <div class="subtext">Dari target bulan ini</div>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Hari Tercatat</h3>
+                        <p id="daysRecorded">0</p>
+                        <div class="subtext">Hari dengan data</div>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Plus/Minus</h3>
+                        <p id="plusMinus">Rp 0</p>
+                        <div class="subtext">Dari target harian</div>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Pencapaian</h3>
+                        <p id="achievement">0%</p>
+                        <div class="subtext">Target 100%</div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress100" style="width: 0%">0% (100%)</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress1" style="width: 0%">0% (1)</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress2" style="width: 0%">0% (2)</div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress3" style="width: 0%">0% (3)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">
+                <span><i class="fas fa-plus-circle"></i> Input Data Harian</span>
+            </h2>
+            <div class="form-group">
+                <label for="date">Tanggal:</label>
+                <input type="date" id="date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="frame">Frame:</label>
+                <input type="number" id="frame" min="0" value="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="sunglass">Sunglass:</label>
+                <input type="number" id="sunglass" min="0" value="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="omzet">Total Omzet (Rp):</label>
+                <input type="number" id="omzet" min="0" required>
+            </div>
+            
+            <div class="btn-group">
+                <button id="saveBtn" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Simpan Data
+                </button>
+                <button id="historyBtn" class="btn btn-secondary">
+                    <i class="fas fa-history"></i> Lihat History
+                </button>
+                <button id="resetBtn" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Reset Data
+                </button>
+            </div>
+            
+            <div class="btn-group" style="margin-top: 10px;">
+                <button id="exportBtn" class="btn btn-warning">
+                    <i class="fas fa-file-export"></i> Export Data
+                </button>
+                <button id="importBtn" class="btn btn-success">
+                    <i class="fas fa-file-import"></i> Import Data
+                </button>
+                <input type="file" id="fileInput" style="display: none;">
+            </div>
+            
+            <div id="reportContainer" class="report-container" style="display: none;">
+                <button id="copyBtn" class="btn btn-success copy-btn">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <div id="reportContent"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fas fa-calendar-alt"></i> History Omzet</h2>
+            <div id="calendarContainer"></div>
+            <div id="historyDetails"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Konfigurasi Database
+        const DB_NAME = 'OmzetDB_V2';
+        const STORE_NAME = 'omzetStore';
+        const TARGET_STORE = 'targetStore';
+        
+        // DOM Elements
+        const dateInput = document.getElementById('date');
+        const frameInput = document.getElementById('frame');
+        const sunglassInput = document.getElementById('sunglass');
+        const omzetInput = document.getElementById('omzet');
+        const saveBtn = document.getElementById('saveBtn');
+        const historyBtn = document.getElementById('historyBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const importBtn = document.getElementById('importBtn');
+        const fileInput = document.getElementById('fileInput');
+        const reportContainer = document.getElementById('reportContainer');
+        const reportContent = document.getElementById('reportContent');
+        const copyBtn = document.getElementById('copyBtn');
+        const calendarModal = document.getElementById('calendarModal');
+        const closeBtn = document.querySelector('.close-btn');
+        const calendarContainer = document.getElementById('calendarContainer');
+        const historyDetails = document.getElementById('historyDetails');
+        
+        // Target elements
+        const targetMonthInput = document.getElementById('targetMonth');
+        const target100Input = document.getElementById('target100');
+        const target1Input = document.getElementById('target1');
+        const target2Input = document.getElementById('target2');
+        const target3Input = document.getElementById('target3');
+        const saveTargetBtn = document.getElementById('saveTargetBtn');
+        const targetStorageStatus = document.getElementById('targetStorageStatus');
+        
+        // Summary elements
+        const totalOmzetEl = document.getElementById('totalOmzet');
+        const daysRecordedEl = document.getElementById('daysRecorded');
+        const plusMinusEl = document.getElementById('plusMinus');
+        const achievementEl = document.getElementById('achievement');
+        const progress100El = document.getElementById('progress100');
+        const progress1El = document.getElementById('progress1');
+        const progress2El = document.getElementById('progress2');
+        const progress3El = document.getElementById('progress3');
+        
+        // Variabel global
+        let omzetData = [];
+        let currentTarget = {
+            month: '',
+            target100: 0,
+            target1: 0,
+            target2: 0,
+            target3: 0,
+            daysInMonth: 0
+        };
+        let activeStorageType = 'localStorage';
+        
+        // ==================== FUNGSI DATABASE ====================
+        
+        // Inisialisasi IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, 2);
+                
+                request.onerror = (event) => {
+                    console.error("Database error:", event.target.error);
+                    reject(event.target.error);
+                };
+                
+                request.onsuccess = (event) => {
+                    resolve(event.target.result);
+                };
+                
+                request.onupgradeneeded = (event) => {
+                    const db = event.target.result;
+                    
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'date' });
+                    }
+                    
+                    if (!db.objectStoreNames.contains(TARGET_STORE)) {
+                        db.createObjectStore(TARGET_STORE, { keyPath: 'month' });
+                    }
+                };
+            });
+        }
+        
+        // Simpan data omzet ke IndexedDB
+        async function saveOmzetToDB(data) {
+            try {
+                const db = await initDB();
+                const tx = db.transaction(STORE_NAME, 'readwrite');
+                const store = tx.objectStore(STORE_NAME);
+                
+                // Hapus semua data lama
+                store.clear();
+                
+                // Simpan data baru
+                data.forEach(item => {
+                    store.put(item);
+                });
+                
+                return new Promise((resolve, reject) => {
+                    tx.oncomplete = () => resolve(true);
+                    tx.onerror = (event) => reject(event.target.error);
+                });
+            } catch (e) {
+                console.error("IndexedDB error:", e);
+                return false;
+            }
+        }
+        
+        // Load data omzet dari IndexedDB
+        async function loadOmzetFromDB() {
+            try {
+                const db = await initDB();
+                const tx = db.transaction(STORE_NAME, 'readonly');
+                const store = tx.objectStore(STORE_NAME);
+                
+                return new Promise((resolve) => {
+                    const request = store.getAll();
+                    
+                    request.onsuccess = (event) => {
+                        resolve(event.target.result || []);
+                    };
+                    
+                    request.onerror = (event) => {
+                        console.error("Load error:", event.target.error);
+                        resolve([]);
+                    };
+                });
+            } catch (e) {
+                console.error("DB init error:", e);
+                return [];
+            }
+        }
+        
+        // Simpan target ke IndexedDB
+        async function saveTargetToDB(target) {
+            try {
+                const db = await initDB();
+                const tx = db.transaction(TARGET_STORE, 'readwrite');
+                const store = tx.objectStore(TARGET_STORE);
+                
+                await store.put(target);
+                
+                return new Promise((resolve, reject) => {
+                    tx.oncomplete = () => resolve(true);
+                    tx.onerror = (event) => reject(event.target.error);
+                });
+            } catch (e) {
+                console.error("IndexedDB error:", e);
+                return false;
+            }
+        }
+        
+        // Load target dari IndexedDB
+        async function loadTargetFromDB() {
+            try {
+                const db = await initDB();
+                const tx = db.transaction(TARGET_STORE, 'readonly');
+                const store = tx.objectStore(TARGET_STORE);
+                
+                return new Promise((resolve) => {
+                    const request = store.getAll();
+                    
+                    request.onsuccess = (event) => {
+                        const targets = event.target.result || [];
+                        // Ambil target terbaru berdasarkan bulan
+                        const latestTarget = targets.sort((a, b) => b.month.localeCompare(a.month))[0];
+                        resolve(latestTarget || null);
+                    };
+                    
+                    request.onerror = (event) => {
+                        console.error("Load error:", event.target.error);
+                        resolve(null);
+                    };
+                });
+            } catch (e) {
+                console.error("DB init error:", e);
+                return null;
+            }
+        }
+        
+        // ==================== FUNGSI PENYIMPANAN FALLBACK ====================
+        
+        // Cek ketersediaan localStorage
+        function isLocalStorageAvailable() {
+            try {
+                const testKey = '__test__';
+                localStorage.setItem(testKey, testKey);
+                localStorage.removeItem(testKey);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        
+        // Simpan data omzet dengan mekanisme fallback
+        async function saveOmzetData(data) {
+            // Coba localStorage dulu
+            if (isLocalStorageAvailable()) {
+                try {
+                    localStorage.setItem('omzetData_v2', JSON.stringify(data));
+                    activeStorageType = 'localStorage';
+                    return true;
+                } catch (e) {
+                    console.log("Gagal menyimpan di localStorage, mencoba fallback...");
+                }
+            }
+            
+            // Coba IndexedDB
+            const success = await saveOmzetToDB(data);
+            if (success) {
+                activeStorageType = 'IndexedDB';
+                return true;
+            }
+            
+            // Semua metode gagal
+            activeStorageType = 'tidak ada penyimpanan';
+            return false;
+        }
+        
+        // Load data omzet dengan mekanisme fallback
+        async function loadOmzetData() {
+            // Coba dari localStorage dulu
+            if (isLocalStorageAvailable()) {
+                try {
+                    const data = localStorage.getItem('omzetData_v2');
+                    if (data) {
+                        activeStorageType = 'localStorage';
+                        return JSON.parse(data);
+                    }
+                } catch (e) {
+                    console.log("Gagal memuat dari localStorage, mencoba fallback...");
+                }
+            }
+            
+            // Coba dari IndexedDB
+            try {
+                const dbData = await loadOmzetFromDB();
+                if (dbData.length > 0) {
+                    activeStorageType = 'IndexedDB';
+                    return dbData;
+                }
+            } catch (e) {
+                console.log("Gagal memuat dari IndexedDB, menggunakan data awal...");
+            }
+            
+            // Jika semua gagal, kembalikan array kosong
+            activeStorageType = 'data awal';
+            return [];
+        }
+        
+        // Simpan target dengan mekanisme fallback
+        async function saveTargetData(target) {
+            // Coba localStorage dulu
+            if (isLocalStorageAvailable()) {
+                try {
+                    localStorage.setItem('omzetTarget_v2', JSON.stringify(target));
+                    return true;
+                } catch (e) {
+                    console.log("Gagal menyimpan target di localStorage, mencoba fallback...");
+                }
+            }
+            
+            // Coba IndexedDB
+            const success = await saveTargetToDB(target);
+            if (success) {
+                return true;
+            }
+            
+            // Semua metode gagal
+            return false;
+        }
+        
+        // Load target dengan mekanisme fallback
+        async function loadTargetData() {
+            // Coba dari localStorage dulu
+            if (isLocalStorageAvailable()) {
+                try {
+                    const data = localStorage.getItem('omzetTarget_v2');
+                    if (data) {
+                        return JSON.parse(data);
+                    }
+                } catch (e) {
+                    console.log("Gagal memuat target dari localStorage, mencoba fallback...");
+                }
+            }
+            
+            // Coba dari IndexedDB
+            try {
+                const dbData = await loadTargetFromDB();
+                if (dbData) {
+                    return dbData;
+                }
+            } catch (e) {
+                console.log("Gagal memuat target dari IndexedDB...");
+            }
+            
+            // Jika semua gagal, kembalikan null
+            return null;
+        }
+        
+        // ==================== FUNGSI UTILITAS ====================
+        
+        // Format angka ke Rupiah
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',-';
+        }
+        
+        // Format tanggal
+        function formatDate(dateStr, options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('id-ID', options);
+        }
+        
+        // Hitung jumlah hari dalam bulan
+        function getDaysInMonth(year, month) {
+            return new Date(year, month, 0).getDate();
+        }
+        
+        // Validasi tanggal dalam bulan target
+        function isValidDateForTarget(dateStr) {
+            if (!currentTarget.month) return true;
+            
+            const inputDate = new Date(dateStr);
+            const inputYear = inputDate.getFullYear();
+            const inputMonth = inputDate.getMonth() + 1;
+            
+            const [targetYear, targetMonth] = currentTarget.month.split('-').map(Number);
+            
+            return inputYear === targetYear && inputMonth === targetMonth;
+        }
+        
+        // ==================== FUNGSI TARGET ====================
+        
+        // Update target bulanan
+        async function updateTarget() {
+            const month = targetMonthInput.value;
+            const target100 = parseInt(target100Input.value) || 0;
+            const target1 = parseInt(target1Input.value) || 0;
+            const target2 = parseInt(target2Input.value) || 0;
+            const target3 = parseInt(target3Input.value) || 0;
+            
+            if (!month || target100 <= 0 || target1 <= 0 || target2 <= 0 || target3 <= 0) {
+                alert('Harap isi bulan dan semua target dengan benar!');
+                return;
+            }
+            
+            const [year, monthNum] = month.split('-').map(Number);
+            const daysInMonth = getDaysInMonth(year, monthNum);
+            
+            currentTarget = {
+                month,
+                target100,
+                target1,
+                target2,
+                target3,
+                daysInMonth
+            };
+            
+            const success = await saveTargetData(currentTarget);
+            if (success) {
+                targetStorageStatus.textContent = `Target untuk ${formatDate(month + '-01', { month: 'long', year: 'numeric' })} berhasil disimpan`;
+                updateMonthlySummary();
+            } else {
+                alert('Gagal menyimpan target!');
+            }
+        }
+        
+        // Load target dari penyimpanan
+        async function loadTarget() {
+            const savedTarget = await loadTargetData();
+            
+            if (savedTarget) {
+                currentTarget = savedTarget;
+                targetMonthInput.value = currentTarget.month;
+                target100Input.value = currentTarget.target100;
+                target1Input.value = currentTarget.target1;
+                target2Input.value = currentTarget.target2;
+                target3Input.value = currentTarget.target3;
+                targetStorageStatus.textContent = `Target terload untuk ${formatDate(currentTarget.month + '-01', { month: 'long', year: 'numeric' })}`;
+            } else {
+                // Set default ke bulan ini jika tidak ada target tersimpan
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                currentTarget.month = `${year}-${month}`;
+                currentTarget.daysInMonth = getDaysInMonth(year, month);
+                
+                targetMonthInput.value = currentTarget.month;
+                targetStorageStatus.textContent = 'Belum ada target yang disimpan';
+            }
+        }
+        
+        // ==================== FUNGSI OMZET ====================
+        
+        // Hitung total omzet
+        function calculateTotalOmzet() {
+            return omzetData.reduce((total, item) => total + item.omzet, 0);
+        }
+        
+        // Update summary bulanan
+        function updateMonthlySummary() {
+            const totalOmzet = calculateTotalOmzet();
+            const daysRecorded = omzetData.length;
+            
+            totalOmzetEl.textContent = formatRupiah(totalOmzet);
+            daysRecordedEl.textContent = daysRecorded;
+            
+            if (currentTarget.target100 > 0) {
+                const dailyTarget100 = Math.round(currentTarget.target100 / currentTarget.daysInMonth);
+                const daysPassed = omzetData.length > 0 ? 
+                    Math.max(...omzetData.map(item => new Date(item.date).getDate())) : 0;
+                const targetShouldBe = dailyTarget100 * daysPassed;
+                const plusMinus = totalOmzet - targetShouldBe;
+                
+                plusMinusEl.textContent = formatRupiah(plusMinus);
+                plusMinusEl.className = plusMinus >= 0 ? 'positive' : 'negative';
+                
+                const percent100 = ((totalOmzet / currentTarget.target100) * 100).toFixed(2);
+                const percent1 = ((totalOmzet / currentTarget.target1) * 100).toFixed(2);
+                const percent2 = ((totalOmzet / currentTarget.target2) * 100).toFixed(2);
+                const percent3 = ((totalOmzet / currentTarget.target3) * 100).toFixed(2);
+                
+                achievementEl.textContent = `${percent100}%`;
+                progress100El.style.width = `${Math.min(percent100, 100)}%`;
+                progress100El.textContent = `${percent100}% (100%)`;
+                
+                progress1El.style.width = `${Math.min(percent1, 100)}%`;
+                progress1El.textContent = `${percent1}% (1)`;
+                
+                progress2El.style.width = `${Math.min(percent2, 100)}%`;
+                progress2El.textContent = `${percent2}% (2)`;
+                
+                progress3El.style.width = `${Math.min(percent3, 100)}%`;
+                progress3El.textContent = `${percent3}% (3)`;
+            } else {
+                plusMinusEl.textContent = 'Rp 0';
+                achievementEl.textContent = '0%';
+                progress100El.style.width = '0%';
+                progress100El.textContent = '0% (100%)';
+                progress1El.style.width = '0%';
+                progress1El.textContent = '0% (1)';
+                progress2El.style.width = '0%';
+                progress2El.textContent = '0% (2)';
+                progress3El.style.width = '0%';
+                progress3El.textContent = '0% (3)';
+            }
+        }
+        
+        // Generate laporan
+        function generateReport(date, frame, sunglass, omzet) {
+            const totalOmzet = calculateTotalOmzet();
+            const reportDate = new Date(date);
+            const daysPassed = reportDate.getDate();
+            
+            // Hitung target harian
+            const dailyTarget100 = currentTarget.target100 > 0 ? 
+                Math.round(currentTarget.target100 / currentTarget.daysInMonth) : 0;
+            const dailyTarget1 = currentTarget.target1 > 0 ? 
+                Math.round(currentTarget.target1 / currentTarget.daysInMonth) : 0;
+            const dailyTarget2 = currentTarget.target2 > 0 ? 
+                Math.round(currentTarget.target2 / currentTarget.daysInMonth) : 0;
+            const dailyTarget3 = currentTarget.target3 > 0 ? 
+                Math.round(currentTarget.target3 / currentTarget.daysInMonth) : 0;
+            
+            // Hitung plus/minus harian
+            const dailyPlusMinus100 = omzet - dailyTarget100;
+            const dailyPlusMinus1 = omzet - dailyTarget1;
+            const dailyPlusMinus2 = omzet - dailyTarget2;
+            const dailyPlusMinus3 = omzet - dailyTarget3;
+            
+            // Hitung plus/minus kumulatif
+            const cumulativePlusMinus100 = totalOmzet - (dailyTarget100 * daysPassed);
+            const cumulativePlusMinus1 = totalOmzet - (dailyTarget1 * daysPassed);
+            const cumulativePlusMinus2 = totalOmzet - (dailyTarget2 * daysPassed);
+            const cumulativePlusMinus3 = totalOmzet - (dailyTarget3 * daysPassed);
+            
+            // Hitung persentase
+            const percentDaily100 = dailyTarget100 > 0 ? ((omzet / dailyTarget100) * 100).toFixed(2) : '0.00';
+            const percentDaily1 = dailyTarget1 > 0 ? ((omzet / dailyTarget1) * 100).toFixed(2) : '0.00';
+            const percentDaily2 = dailyTarget2 > 0 ? ((omzet / dailyTarget2) * 100).toFixed(2) : '0.00';
+            const percentDaily3 = dailyTarget3 > 0 ? ((omzet / dailyTarget3) * 100).toFixed(2) : '0.00';
+            
+            const percentMonthly100 = currentTarget.target100 > 0 ? ((totalOmzet / currentTarget.target100) * 100).toFixed(2) : '0.00';
+            const percentMonthly1 = currentTarget.target1 > 0 ? ((totalOmzet / currentTarget.target1) * 100).toFixed(2) : '0.00';
+            const percentMonthly2 = currentTarget.target2 > 0 ? ((totalOmzet / currentTarget.target2) * 100).toFixed(2) : '0.00';
+            const percentMonthly3 = currentTarget.target3 > 0 ? ((totalOmzet / currentTarget.target3) * 100).toFixed(2) : '0.00';
+            
+            // Buat laporan
+            let report = `Selamat Malam\n`;
+            report += `Report AEON BSD :\n`;
+            report += `${formatDate(date)}\n`;
+            report += `Frame : ${frame}\n`;
+            report += `Sunglass : ${sunglass}\n`;
+            report += `Omzet : ${formatRupiah(omzet)}\n`;
+            report += `Total Sebelumnya : ${formatRupiah(totalOmzet - omzet)}\n`;
+            report += `Total collection : ${formatRupiah(totalOmzet)}\n`;
+            
+            if (dailyTarget100 > 0) {
+                report += `Target Harian : ${formatRupiah(dailyTarget100)}\n`;
+                report += `*Plus/Minus : ${formatRupiah(dailyPlusMinus100)}*\n\n`;
+                report += `_Plus/Minus harian:_\n`;
+                report += `- 100%: ${formatRupiah(cumulativePlusMinus100)}\n`;
+                report += `- 1: ${formatRupiah(cumulativePlusMinus1)}\n`;
+                report += `- 2: ${formatRupiah(cumulativePlusMinus2)}\n`;
+                report += `- 3: ${formatRupiah(cumulativePlusMinus3)}\n\n`;
+                report += `Target harian: \n`;
+                report += `- ${formatRupiah(dailyTarget100)} (100%)\n`;
+                report += `- ${formatRupiah(dailyTarget1)} (1)\n`;
+                report += `- ${formatRupiah(dailyTarget2)} (2)\n`;
+                report += `- ${formatRupiah(dailyTarget3)} (3)\n\n`;
+            }
+            
+            report += `Percentase: \n`;
+            report += `- ${percentDaily100}% (harian 100%)\n`;
+            report += `- ${percentDaily1}% (harian 1)\n`;
+            report += `- ${percentDaily2}% (harian 2)\n`;
+            report += `- ${percentDaily3}% (harian 3)\n\n`;
+            report += `Percentase bulanan: \n`;
+            report += `- ${percentMonthly100}% (100%)\n`;
+            report += `- ${percentMonthly1}% (1)\n`;
+            report += `- ${percentMonthly2}% (2)\n`;
+            report += `- ${percentMonthly3}% (3)\n\n`;
+            report += `Terima kasih 🙏🏻`;
+            
+            return report;
+        }
+        
+        // Simpan data omzet
+        async function saveDailyOmzet() {
+            const date = dateInput.value;
+            const frame = parseInt(frameInput.value) || 0;
+            const sunglass = parseInt(sunglassInput.value) || 0;
+            const omzet = parseInt(omzetInput.value);
+            
+            if (!date || isNaN(omzet)) {
+                alert('Harap isi tanggal dan total omzet!');
+                return;
+            }
+            
+            // Validasi tanggal dalam bulan target
+            if (currentTarget.month && !isValidDateForTarget(date)) {
+                const targetMonth = formatDate(currentTarget.month + '-01', { month: 'long', year: 'numeric' });
+                if (!confirm(`Tanggal yang Anda input tidak berada dalam bulan target (${targetMonth}). Yakin ingin melanjutkan?`)) {
+                    return;
+                }
+            }
+            
+            // Validasi tanggal tidak boleh sebelumnya dari data terakhir
+            const lastDate = omzetData.length > 0 ? new Date(omzetData[omzetData.length - 1].date) : null;
+            const inputDate = new Date(date);
+            
+            if (lastDate && inputDate < lastDate) {
+                if (!confirm('Tanggal yang Anda input lebih awal dari data terakhir. Yakin ingin melanjutkan?')) {
+                    return;
+                }
+            }
+            
+            // Cek apakah data untuk tanggal ini sudah ada
+            const existingIndex = omzetData.findIndex(item => item.date === date);
+            
+            if (existingIndex >= 0) {
+                // Update data yang sudah ada
+                omzetData[existingIndex] = { date, frame, sunglass, omzet };
+            } else {
+                // Tambah data baru
+                omzetData.push({ date, frame, sunglass, omzet });
+            }
+            
+            // Urutkan data berdasarkan tanggal
+            omzetData.sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            // Simpan data
+            const success = await saveOmzetData(omzetData);
+            if (!success) {
+                alert('Peringatan: Data tidak dapat disimpan secara permanen. Gunakan fitur export untuk backup.');
+            }
+            
+            // Update tampilan
+            updateMonthlySummary();
+            
+            // Tampilkan laporan
+            const report = generateReport(date, frame, sunglass, omzet);
+            reportContent.textContent = report;
+            reportContainer.style.display = 'block';
+            
+            // Reset form
+            frameInput.value = '0';
+            sunglassInput.value = '0';
+            omzetInput.value = '';
+            omzetInput.focus();
+        }
+        
+        // Export data
+        function exportData() {
+            const dataToExport = {
+                omzetData: omzetData,
+                target: currentTarget,
+                version: 'V2 by Tian',
+                exportedAt: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(dataToExport, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportName = `omzet_data_${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportName);
+            linkElement.click();
+        }
+        
+        // Import data
+        function importData(file) {
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                try {
+                    const importedData = JSON.parse(event.target.result);
+                    
+                    if (!importedData.omzetData || !Array.isArray(importedData.omzetData)) {
+                        throw new Error('Format file tidak valid');
+                    }
+                    
+                    const confirmMessage = `Yakin ingin mengimpor ${importedData.omzetData.length} data omzet?` + 
+                        (importedData.target ? `\nDan target untuk ${formatDate(importedData.target.month + '-01', { month: 'long', year: 'numeric' })}` : '');
+                    
+                    if (confirm(confirmMessage)) {
+                        omzetData = importedData.omzetData;
+                        
+                        if (importedData.target) {
+                            currentTarget = importedData.target;
+                            targetMonthInput.value = currentTarget.month;
+                            target100Input.value = currentTarget.target100;
+                            target1Input.value = currentTarget.target1;
+                            target2Input.value = currentTarget.target2;
+                            target3Input.value = currentTarget.target3;
+                            await saveTargetData(currentTarget);
+                        }
+                        
+                        await saveOmzetData(omzetData);
+                        updateMonthlySummary();
+                        alert('Data berhasil diimpor!');
+                    }
+                } catch (error) {
+                    alert('Gagal memproses file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        // Render kalender history
+        function renderCalendar() {
+            calendarContainer.innerHTML = '';
+            historyDetails.innerHTML = '';
+            
+            if (omzetData.length === 0) {
+                calendarContainer.innerHTML = '<p>Belum ada data omzet</p>';
+                return;
+            }
+            
+            // Hitung summary
+            const totalOmzet = calculateTotalOmzet();
+            const totalFrame = omzetData.reduce((sum, item) => sum + item.frame, 0);
+            const totalSunglass = omzetData.reduce((sum, item) => sum + item.sunglass, 0);
+            
+            // Tampilkan summary
+            const summaryHTML = `
+                <div class="card">
+                    <h3>Summary ${currentTarget.month ? formatDate(currentTarget.month + '-01', { month: 'long', year: 'numeric' }) : 'Bulan Ini'}</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <h3>Total Omzet</h3>
+                            <p>${formatRupiah(totalOmzet)}</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Total Frame</h3>
+                            <p>${totalFrame}</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Total Sunglass</h3>
+                            <p>${totalSunglass}</p>
+                        </div>
+                        <div class="summary-item">
+                            <h3>Hari Tercatat</h3>
+                            <p>${omzetData.length}</p>
+                        </div>
+                    </div>
+                    <p class="storage-status">Menggunakan penyimpanan: ${activeStorageType}</p>
+                </div>
+            `;
+            calendarContainer.innerHTML = summaryHTML;
+            
+            // Buat tabel history
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+            
+            // Header tabel
+            const headerRow = document.createElement('tr');
+            const headers = ['Tanggal', 'Frame', 'Sunglass', 'Omzet', 'Plus/Minus 100%', 'Plus/Minus 1', 'Plus/Minus 2', 'Plus/Minus 3', 'Action'];
+            
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Isi tabel
+            omzetData.forEach(item => {
+                const row = document.createElement('tr');
+                const itemDate = new Date(item.date);
+                
+                // Hitung target harian
+                const dailyTarget100 = currentTarget.target100 > 0 ? 
+                    Math.round(currentTarget.target100 / currentTarget.daysInMonth) : 0;
+                const dailyTarget1 = currentTarget.target1 > 0 ? 
+                    Math.round(currentTarget.target1 / currentTarget.daysInMonth) : 0;
+                const dailyTarget2 = currentTarget.target2 > 0 ? 
+                    Math.round(currentTarget.target2 / currentTarget.daysInMonth) : 0;
+                const dailyTarget3 = currentTarget.target3 > 0 ? 
+                    Math.round(currentTarget.target3 / currentTarget.daysInMonth) : 0;
+                
+                // Hitung plus/minus
+                const plusMinus100 = item.omzet - dailyTarget100;
+                const plusMinus1 = item.omzet - dailyTarget1;
+                const plusMinus2 = item.omzet - dailyTarget2;
+                const plusMinus3 = item.omzet - dailyTarget3;
+                
+                // Kolom tanggal
+                const dateCell = document.createElement('td');
+                dateCell.textContent = formatDate(item.date, { weekday: 'short', day: 'numeric', month: 'short' });
+                row.appendChild(dateCell);
+                
+                // Kolom frame
+                const frameCell = document.createElement('td');
+                frameCell.textContent = item.frame;
+                row.appendChild(frameCell);
+                
+                // Kolom sunglass
+                const sunglassCell = document.createElement('td');
+                sunglassCell.textContent = item.sunglass;
+                row.appendChild(sunglassCell);
+                
+                // Kolom omzet
+                const omzetCell = document.createElement('td');
+                omzetCell.textContent = formatRupiah(item.omzet);
+                row.appendChild(omzetCell);
+                
+                // Kolom plus/minus 100%
+                const pm100Cell = document.createElement('td');
+                pm100Cell.textContent = dailyTarget100 > 0 ? formatRupiah(plusMinus100) : '-';
+                pm100Cell.className = plusMinus100 >= 0 ? 'positive' : 'negative';
+                row.appendChild(pm100Cell);
+                
+                // Kolom plus/minus 1
+                const pm1Cell = document.createElement('td');
+                pm1Cell.textContent = dailyTarget1 > 0 ? formatRupiah(plusMinus1) : '-';
+                pm1Cell.className = plusMinus1 >= 0 ? 'positive' : 'negative';
+                row.appendChild(pm1Cell);
+                
+                // Kolom plus/minus 2
+                const pm2Cell = document.createElement('td');
+                pm2Cell.textContent = dailyTarget2 > 0 ? formatRupiah(plusMinus2) : '-';
+                pm2Cell.className = plusMinus2 >= 0 ? 'positive' : 'negative';
+                row.appendChild(pm2Cell);
+                
+                // Kolom plus/minus 3
+                const pm3Cell = document.createElement('td');
+                pm3Cell.textContent = dailyTarget3 > 0 ? formatRupiah(plusMinus3) : '-';
+                pm3Cell.className = plusMinus3 >= 0 ? 'positive' : 'negative';
+                row.appendChild(pm3Cell);
+                
+                // Kolom action
+                const actionCell = document.createElement('td');
+                const viewBtn = document.createElement('button');
+                viewBtn.textContent = 'Lihat';
+                viewBtn.classList.add('btn', 'btn-secondary');
+                viewBtn.style.padding = '5px 10px';
+                viewBtn.style.fontSize = '0.8rem';
+                viewBtn.addEventListener('click', () => showDetails(item));
+                actionCell.appendChild(viewBtn);
+                row.appendChild(actionCell);
+                
+                tbody.appendChild(row);
+            });
+            
+            table.appendChild(tbody);
+            calendarContainer.appendChild(table);
+        }
+        
+        // Tampilkan detail laporan
+        function showDetails(item) {
+            const report = generateReport(item.date, item.frame, item.sunglass, item.omzet);
+            historyDetails.innerHTML = `
+                <div class="card">
+                    <h3>Detail Laporan - ${formatDate(item.date)}</h3>
+                    <div class="report-container">
+                        <button id="copyDetailBtn" class="btn btn-success copy-btn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <div style="white-space: pre-line; font-family: monospace;">
+                            ${report}
+                        </div>
+                    </div>
+                    <button id="deleteBtn" class="btn btn-danger" style="margin-top: 15px;">
+                        <i class="fas fa-trash-alt"></i> Hapus Data Ini
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('copyDetailBtn').addEventListener('click', () => {
+                const range = document.createRange();
+                const div = historyDetails.querySelector('div.report-container div');
+                range.selectNode(div);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Laporan berhasil disalin!');
+            });
+            
+            document.getElementById('deleteBtn').addEventListener('click', async () => {
+                if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                    omzetData = omzetData.filter(data => data.date !== item.date);
+                    await saveOmzetData(omzetData);
+                    updateMonthlySummary();
+                    renderCalendar();
+                    historyDetails.innerHTML = '<div class="card"><p>Data telah dihapus</p></div>';
+                }
+            });
+            
+            historyDetails.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // ==================== INISIALISASI APLIKASI ====================
+        
+        async function initApp() {
+            // Set tanggal default ke hari ini
+            const today = new Date();
+            dateInput.valueAsDate = today;
+            
+            // Load data
+            omzetData = await loadOmzetData();
+            await loadTarget();
+            updateMonthlySummary();
+            
+            // Event listeners
+            saveBtn.addEventListener('click', saveDailyOmzet);
+            copyBtn.addEventListener('click', () => {
+                const range = document.createRange();
+                range.selectNode(reportContent);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+                alert('Laporan berhasil disalin!');
+            });
+            
+            resetBtn.addEventListener('click', async () => {
+                if (confirm('Apakah Anda yakin ingin mereset semua data omzet? Semua data akan dihapus.')) {
+                    omzetData = [];
+                    await saveOmzetData(omzetData);
+                    updateMonthlySummary();
+                    reportContainer.style.display = 'none';
+                    alert('Semua data omzet telah direset');
+                }
+            });
+            
+            historyBtn.addEventListener('click', () => {
+                calendarModal.style.display = 'block';
+                renderCalendar();
+            });
+            
+            closeBtn.addEventListener('click', () => {
+                calendarModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === calendarModal) {
+                    calendarModal.style.display = 'none';
+                }
+            });
+            
+            exportBtn.addEventListener('click', exportData);
+            importBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) importData(file);
+                fileInput.value = ''; // Reset input file
+            });
+            
+            saveTargetBtn.addEventListener('click', updateTarget);
+            
+            omzetInput.focus();
+        }
+        
+        // Jalankan aplikasi
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
